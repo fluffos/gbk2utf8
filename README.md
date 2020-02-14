@@ -1,3 +1,25 @@
+<p align="center">
+    <h3 align="center">gbk2utf8</h3>
+    <p align="center">提供 GB2312/GBK/GB18030 与 utf-8 编码之间的互相转换</p>
+    <p align="center">
+<a href="https://github.com/fluffos/gbk2utf8/releases/latest">
+<img alt="最新版本" src="https://img.shields.io/github/v/release/fluffos/gbk2utf8.svg?logo=github&style=flat-square">
+</a>
+<a href="https://github.com/fluffos/gbk2utf8/actions?workflow=Release">
+<img alt="Release workflow" src="https://github.com/fluffos/gbk2utf8/workflows/Release/badge.svg">
+</a>
+<a href="https://github.com/fluffos/gbk2utf8/actions?workflow=Build">
+<img alt="Build workflow" src="https://github.com/fluffos/gbk2utf8/workflows/Build/badge.svg">
+</a>
+<a href="https://goreportcard.com/report/github.com/fluffos/gbk2utf8">
+<img alt="Go Report" src="https://goreportcard.com/badge/github.com/fluffos/gbk2utf8">
+</a>
+<a href="https://golangci.com/r/github.com/fluffos/gbk2utf8">
+<img alt="GolangCI Report" src="https://github.com/golangci/golangci-web/blob/master/src/assets/images/badge_a_plus_flat.svg">
+</a>
+    </p>
+</p>
+
 # gbk2utf8
 
 gbk2utf8 提供 GB2312/GBK/GB18030 与 utf-8 编码之间的互相转换
@@ -64,3 +86,9 @@ Flags:
   -d, --dst string        转换完的目标文件名或目录名。注意目标路径下的内容会被清空
   -p, --pattern string    想要转换的文件名的模式。只有文件名符合模式的文件才会被转换 (default "*.c")
 ```
+
+## 如何贡献
+
+* 体验并向周围的人分享你的体验结果
+* 通过[提交 issue](https://github.com/fluffos/gbk2utf8/issues/new) 来反馈意见
+* 通过 PR 来贡献代码，贡献代码时请先阅读[贡献指南](CONTRIBUTING.md)
