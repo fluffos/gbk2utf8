@@ -26,6 +26,15 @@
 
 前往[发布页面](https://github.com/fluffos/gbk2utf8/releases)下载适合你的操作系统的版本
 
+### HomeBrew 安装
+
+[HomeBrew](https://brew.sh) 用户可以使用 `brew` 命令快速安装：
+
+```
+brew tap mudclient/tap
+brew install gbk2utf8
+```
+
 ### 源码安装
 
 ```Shell
