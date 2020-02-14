@@ -18,6 +18,10 @@ import (
 	"golang.org/x/text/transform"
 )
 
+// Config 是程序的配置数据结构。
+// 通过 github.com/flw-cn/go-smartConfig 的支持，可以同时将配置文件的内容和
+// 命令行参数的内容捕获至本数据结构。
+//
 type Config struct {
 	From    string `flag:"f|GB18030|将要转换的文件的编码，可选值: GB2312/GBK/GB18030/BIG5/UTF8"`
 	To      string `flag:"t|UTF8|想要转换成的目的文件编码，可选值: GB2312/GBK/GB18030/BIG5/UTF8"`
@@ -37,6 +41,8 @@ func main() {
 	log.Printf("全部转换完成。共转换了 %d 个文件，耗时 %s。", app.files, time.Since(begin))
 }
 
+// App 用来封装应用程序，主要是为了在几个方法之间共享变量及状态。
+//
 type App struct {
 	config Config
 
@@ -50,6 +56,8 @@ type App struct {
 	files int
 }
 
+// NewApp 用来创建一个 App，创建时必须指定 App 名称及版本号。
+//
 func NewApp(name string, version string) *App {
 	return &App{
 		name:    name,
@@ -57,8 +65,9 @@ func NewApp(name string, version string) *App {
 	}
 }
 
+// LoadConfig 方法用来从配置文件和命令行参数中捕获程序运行时配置。
+//
 func (app *App) LoadConfig() {
-	app.config = Config{}
 	smartConfig.VersionDetail = func() string {
 		info := fmt.Sprintf("版本信息如下：\n程序版本: %s\n编译时间: %s\n编译环境: %s\n编译设备: %s\n其中：\n",
 			Version, BuildTime, BuildGoVersion, BuildHost)
@@ -75,6 +84,8 @@ func (app *App) LoadConfig() {
 	app.to = resolveEncoding(app.config.To).NewEncoder()
 }
 
+// Run 方法遍历目录，为每个文件执行编码转换操作。
+//
 func (app *App) Run() {
 	err := filepath.Walk(app.config.Src, app.walk)
 	if err != nil {
