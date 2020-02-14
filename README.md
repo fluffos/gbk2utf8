@@ -24,7 +24,7 @@
 
 ### 预编译二进制
 
-前往[发布页面](https://github.com/fluffos/gbk2utf8/releases)下载适合你的操作系统的版本
+前往[发布页面](https://github.com/fluffos/gbk2utf8/releases)下载适合你的操作系统的版本。
 
 ### HomeBrew 安装
 
@@ -41,26 +41,26 @@ brew install gbk2utf8
 go get -u github.com/fluffos/gbk2utf8
 ```
 
-## 使用用法
+## 用法举例
 
 gbk2utf8 是一个命令行工具，通过命令行参数来控制其行为。举个例子：
 
 ### 转换单个文件
 
 ```
-./gbk2utf8 --from GB18030 --to UTF8 --src foo.c --dst foo-utf8.c
+gbk2utf8 --from GB18030 --to UTF8 --src foo.c --dst foo-utf8.c
 ```
 
 以上命令可以将文件 `foo.c` 从 `GB18030` 编码转换至 `UTF8` 编码，并保存为文件 `foo-utf8.c`。
 
 老实说，上面命令所做的事情和 [iconv](https://www.gnu.org/savannah-checkouts/gnu/libiconv/documentation/libiconv-1.15/iconv.1.html) 没什么不同。甚至其支持的编码种类还不如 `iconv` 多。
 
-而 `gbk2utf8` 的主要优点其实是因为它能够[转换整个目录](#转换整个目录)。
+但 `gbk2utf8` 的主要优点在于它能够一次性[转换整个目录树](#转换整个目录树)。
 
-### 转换整个目录
+### 转换整个目录树
 
 ```
-./gbk2utf8 --from GB18030 --to UTF8 --src code --dst code-utf8 --pattern "*.c"
+gbk2utf8 --from GB18030 --to UTF8 --src code --dst code-utf8 --pattern "*.c"
 ```
 
 以上命令可以将 `code` 目录及其子目录下的所有 `*.c` 文件，
@@ -73,11 +73,11 @@ gbk2utf8 是一个命令行工具，通过命令行参数来控制其行为。�
 在命令行下输入 `gbk2utf8 --help` 可以看到帮助如下：
 
 ```Shell
-$ ./gbk2utf8 --help
-GBK2UTF8(version v1.0)
+$ gbk2utf8 --help
+gbk2utf8(version v1.0.3)
 
 Usage:
-  ./gbk2utf8 [flags]
+  gbk2utf8 [flags]
 
 Flags:
   -c, --config FILENAME   config FILENAME, default to `config.yaml` or `config.json`
@@ -94,6 +94,6 @@ Flags:
 
 ## 如何贡献
 
-* 体验并向周围的人分享你的体验结果
-* 通过[提交 issue](https://github.com/fluffos/gbk2utf8/issues/new) 来反馈意见
-* 通过 PR 来贡献代码，贡献代码时请先阅读[贡献指南](CONTRIBUTING.md)
+* 体验并向周围的人分享你的体验结果。
+* 通过[提交 issue](https://github.com/fluffos/gbk2utf8/issues/new) 来反馈意见。
+* 通过 PR 来贡献代码，贡献代码时请先阅读[贡献指南](CONTRIBUTING.md)。
