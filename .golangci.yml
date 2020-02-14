@@ -1,0 +1,8 @@
+service:
+    golangci-lint-version: 1.23.x
+    prepare:
+        - go mod tidy
+        - go generate ./...
+
+linters:
+    enable-all: true

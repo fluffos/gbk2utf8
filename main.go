@@ -1,6 +1,9 @@
 package main
 
+//go:generate go run github.com/flw-cn/go-smartConfig/gen-ver -a gbk2utf8
+
 import (
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -24,7 +27,7 @@ type Config struct {
 }
 
 func main() {
-	app := NewApp("GBK2UTF8", "v1.0")
+	app := NewApp(AppName, Version)
 	app.LoadConfig()
 
 	begin := time.Now()
@@ -56,6 +59,16 @@ func NewApp(name string, version string) *App {
 
 func (app *App) LoadConfig() {
 	app.config = Config{}
+	smartConfig.VersionDetail = func() string {
+		info := fmt.Sprintf("版本信息如下：\n程序版本: %s\n编译时间: %s\n编译环境: %s\n编译设备: %s\n其中：\n",
+			Version, BuildTime, BuildGoVersion, BuildHost)
+		for _, contributor := range Contributors {
+			info += fmt.Sprintf("    %s 贡献了 %d 行代码\n", contributor.Name, contributor.Lines)
+		}
+
+		return info
+	}()
+
 	smartConfig.LoadConfig(app.name, app.version, &app.config)
 
 	app.from = resolveEncoding(app.config.From).NewDecoder()

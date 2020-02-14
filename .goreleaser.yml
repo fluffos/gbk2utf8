@@ -1,0 +1,75 @@
+# vim: set softtabstop=2 tabstop=2 shiftwidth=2:
+before:
+    hooks:
+      - go mod tidy
+      - go generate ./...
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - 386
+      - amd64
+    ignore:
+      - goos: darwin
+        goarch: 386
+
+archives:
+  - files:
+      - LICENSE
+      - README.md
+    name_template: "{{ .ProjectName }}_{{ .Env.GIT_DESCRIBE }}_{{ .Os }}_{{ .Arch }}"
+    wrap_in_directory: true
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+    replacements:
+        darwin: Darwin
+        linux: Linux
+        windows: Windows
+        386: i386
+        amd64: x86_64
+
+checksum:
+    name_template: 'checksums.txt'
+
+snapshot:
+    name_template: "snapshot-{{ .Env.GIT_DESCRIBE }}"
+
+release:
+    prerelease: auto
+    name_template: "{{ .Env.GIT_DESCRIBE }}"
+
+changelog:
+    filters:
+        exclude:
+          - '^docs:'
+          - '^style:'
+          - '^chore:'
+          - '^(?i)WIP:'
+          - typo
+          - Merge pull request
+          - Merge branch
+
+brews:
+  - github:
+        owner: mudclient
+        name: homebrew-tap
+    folder: Formula
+    commit_author:
+        name: goreleaserbot
+        email: goreleaser@carlosbecker.com
+    description: "GB2312/GBK/GB18030 与 UTF-8 的编码转换器"
+    homepage: "https://github.com/fluffos/gbk2utf8"
+    skip_upload: false
+    install: |
+        bin.install "gbk2utf8"
